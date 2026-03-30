@@ -19,6 +19,95 @@ const defaultBranding = {
   telegram: "https://t.me/yourbrand",
 };
 
+const defaultWebsiteContent = {
+  home: {
+    heroEyebrow: "Offline biznes uchun premium web qobiq",
+    storyEyebrow: "Real loyiha hissi",
+    storyTitle: "Landing ichida faqat banner emas, balki brend atmosferasi",
+    storyText:
+      "Siz so'raganidek sahifa alohida bloklarga bo'lindi: ishonch, jarayon, signature menu va offline biznesga mos CTA.",
+    servicesEyebrow: "Xizmatlar",
+    servicesTitle: "Mahsulot bilan birga xizmatlar ham sotiladi",
+    servicesText:
+      "Delivery, pickup, reservation va catering kabi oqimlar fastfood nuqtasini oddiy menu emas, real biznes platformaga aylantiradi.",
+    processEyebrow: "Ish jarayoni",
+    processTitle: "Mijoz ko'radigan jarayon lavhalari",
+    processText:
+      "Mahsulot qanday tayyorlanishi, qanday qadoqlanishi va qanday xizmat ko'rsatilishi landing ichida ko'rinib turadi.",
+    menuEyebrow: "Signature menu",
+    menuTitle: "Landing ichida ham menu preview tayyor",
+    testimonialsEyebrow: "Mijoz ishonchi",
+    testimonialsTitle: "Fastfood emas, tajriba sotilmoqda",
+    ctaEyebrow: "Keyingi qadam",
+    ctaTitle: "Alohida sahifalarga hozir o'tish",
+    ctaText:
+      "Menu/order, reservation va biznes aloqa sahifalari endi tayyor oqim sifatida ishlaydi.",
+    metrics: [
+      { label: "Oylik order oqimi", value: 12000, suffix: "+", prefix: "", description: "Sayt va offline nuqtalar uchun bitta conversion markazi." },
+      { label: "Mijoz ratingi", value: 49, suffix: "", prefix: "4.", description: "Tajriba, servis va issiq mahsulot sifatli fastfood sifatida ko'rinadi." },
+      { label: "Bronga tayyor stol", value: 18, suffix: "+", prefix: "", description: "Tadbir, uchrashuv yoki oilaviy kechki ovqat uchun alohida oqim." },
+    ],
+    features: [
+      { label: "01 · Story-led intro", title: "Bir qarashda premium", description: "Hero, sahifa kompozitsiyasi va rang palitrasi fastfoodni oddiy kiosk emas, kuchli nuqta sifatida ko'rsatadi." },
+      { label: "02 · Separate pages", title: "Funksiyalar ajratildi", description: "Menu/order, bron va aloqa so'rovlari alohida sahifalarda ishlaydi, shu sabab foydalanuvchi chalkashmaydi." },
+      { label: "03 · Offline-business fit", title: "Salon va delivery birga", description: "Sayt delivery, pickup, reservation va hamkorlik kabi real biznes ssenariylarini birlashtiradi." },
+    ],
+    process: [
+      { step: "01 · Grill", title: "Issiq batch va tez tayyorlash", description: "Rush paytida ham servis yo'qolmaydigan, ekranda sotiladigan tayyorlash kayfiyati.", image: "grill" },
+      { step: "02 · Pack", title: "Signature mahsulotni taqdim etish", description: "Mahsulot ko'rinishi sahifa ichida premium ko'rinishni ushlab turadi va savatga qo'shishga undaydi.", image: "menu" },
+      { step: "03 · Serve", title: "Zal, uchrashuv va oila oqimi", description: "Dine-in jarayoni ko'rinishi reservation bo'limini tabiiy ravishda sotadi.", image: "dining" },
+    ],
+    testimonials: [
+      { quote: "Dine-in bron va order sahifasi alohida bo'lgani uchun mijoz qaysi oqimda ekanini tez tushunadi.", author: "Brand owner", meta: "Conversion focus" },
+      { quote: "Landingdagi rasmli jarayon bloklari offline nuqtani ishonchliroq ko'rsatadi va reklama sahifasi kabi ko'rinmaydi.", author: "Creative direction", meta: "Visual trust" },
+      { quote: "Menu qidiruvi, bron formasi va aloqa sohasi ajralgani kundalik ishlatishda ancha qulay bo'ladi.", author: "Operations view", meta: "Real business flow" },
+    ],
+  },
+  booking: {
+    heroEyebrow: "Reservation flow",
+    heroTitle: "Dine-in va uchrashuvlar uchun alohida bron sahifasi",
+    heroSubtitle:
+      "Offline biznes uchun stol bron qilish alohida yo'nalishda bo'lishi kerak. Shu sabab bu sahifa buyurtmadan mustaqil, toza va maqsadga yo'naltirilgan.",
+    formTitle: "Bron yuborish",
+    formText: "Sana, vaqt va mehmonlar sonini qoldiring. Admin panel orqali holat tasdiqlanadi.",
+    useCasesTitle: "Use cases",
+    stats: [
+      { label: "Shift format", value: "Lunch / evening" },
+      { label: "Group size", value: "1-20 guest" },
+      { label: "Admin flow", value: "Status control" },
+    ],
+    useCases: [
+      { title: "Tug'ilgan kun va kichik tadbirlar", description: "Oila yoki yaqin doira uchun oldindan tayyorlanadigan joylashuv." },
+      { title: "Business meeting va team lunch", description: "Tez ovqatlanish bilan birga qulay uchrashuv muhiti ham saqlanadi." },
+      { title: "Weekend family table", description: "Oldindan bron qilingan stol navbat muammosini keskin kamaytiradi." },
+    ],
+  },
+  contact: {
+    heroEyebrow: "Business contact",
+    heroTitle: "Hamkorlik, catering va aloqani alohida oqim qildik",
+    heroSubtitle:
+      "Offline fastfood biznesida faqat buyurtma emas, filiallar, tadbirlar va sheriklik so'rovlari ham muhim.",
+    formTitle: "So'rov yuborish",
+    formText: "Hamkorlik, catering, franchise yoki maxsus tadbir bo'yicha so'rovni shu yerdan qabul qilasiz.",
+    contactCards: [
+      { label: "Telefon", value: "+998 90 123 45 67" },
+      { label: "Lokatsiya", value: "Toshkent shahri, Premium Food Hall 7" },
+      { label: "Telegram", value: "@brand" },
+    ],
+    branches: [
+      { label: "Yunusobod", title: "Lunch rush nuqtasi", description: "10:00 - 23:00 oralig'ida pickup va delivery oqimi yuqori bo'lgan filial." },
+      { label: "Chilonzor", title: "Family box hub", description: "Kechki pik vaqt uchun oilaviy combo va reservation oqimiga mos keladi." },
+      { label: "Markaz", title: "Business meeting spot", description: "Tadbir, uchrashuv va hamkorlik muzokaralari uchun kuchli lokatsiya." },
+    ],
+  },
+};
+
+const defaultServices = [
+  { name: "Premium delivery", description: "Issiq qadoqlash, tez marshrut va call markaz bilan boshqariladigan delivery oqimi.", priceLabel: "30-45 min", badge: "Delivery", image: "/assets/images/grill-scene.jpg", featured: true, active: true },
+  { name: "Pickup window", description: "Oldindan buyurtma berib, navbatsiz olib ketish uchun tez issue oynasi.", priceLabel: "12 min", badge: "Pickup", image: "/assets/images/menu-burger.jpg", featured: true, active: true },
+  { name: "Catering va event", description: "Office lunch, tadbir va yopiq uchrashuvlar uchun moslashtiriladigan paketlar.", priceLabel: "Custom", badge: "Event", image: "/assets/images/dining-scene.jpg", featured: true, active: true },
+];
+
 const sceneImages = {
   hero: "/assets/images/hero-burger.jpg",
   menu: "/assets/images/menu-burger.jpg",
@@ -36,7 +125,7 @@ const categoryArtwork = {
 
 const moneyFormatter = new Intl.NumberFormat("uz-UZ");
 
-function escapeHtml(value) {
+export function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, (char) => {
     switch (char) {
       case "&":
@@ -84,6 +173,33 @@ function normalizeBranding(branding = {}) {
     ...defaultBranding,
     ...branding,
   };
+}
+
+function mergeContent(base, incoming) {
+  if (Array.isArray(base)) {
+    return Array.isArray(incoming) ? incoming : [...base];
+  }
+
+  if (base && typeof base === "object") {
+    const result = { ...base };
+    if (!incoming || typeof incoming !== "object" || Array.isArray(incoming)) {
+      return result;
+    }
+    Object.keys(incoming).forEach((key) => {
+      if (!(key in base)) {
+        result[key] = incoming[key];
+        return;
+      }
+      result[key] = mergeContent(base[key], incoming[key]);
+    });
+    return result;
+  }
+
+  return incoming === undefined ? base : incoming;
+}
+
+function normalizeWebsiteContent(content = {}) {
+  return mergeContent(defaultWebsiteContent, content);
 }
 
 function isImageUrl(value) {
@@ -220,13 +336,34 @@ export async function fetchJSON(url, options = {}) {
   return data;
 }
 
-export async function loadBranding() {
-  try {
-    const data = await fetchJSON("/api/config");
-    return normalizeBranding(data.branding);
-  } catch {
-    return normalizeBranding();
+let siteConfigPromise = null;
+
+export async function loadSiteConfig() {
+  if (!siteConfigPromise) {
+    siteConfigPromise = fetchJSON("/api/config")
+      .then((data) => ({
+        branding: normalizeBranding(data.branding),
+        websiteContent: normalizeWebsiteContent(data.websiteContent),
+        cloudinaryEnabled: Boolean(data.cloudinaryEnabled),
+      }))
+      .catch(() => ({
+        branding: normalizeBranding(),
+        websiteContent: normalizeWebsiteContent(),
+        cloudinaryEnabled: false,
+      }));
   }
+
+  return siteConfigPromise;
+}
+
+export async function loadBranding() {
+  const config = await loadSiteConfig();
+  return config.branding;
+}
+
+export async function loadWebsiteContent() {
+  const config = await loadSiteConfig();
+  return config.websiteContent;
 }
 
 export async function loadMenu(params = {}) {
@@ -239,6 +376,22 @@ export async function loadMenu(params = {}) {
   const suffix = query.toString() ? `?${query.toString()}` : "";
   const data = await fetchJSON(`/api/menu${suffix}`);
   return Array.isArray(data.items) ? data.items : [];
+}
+
+export async function loadServices(params = {}) {
+  const query = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && String(value).trim() !== "") {
+      query.set(key, value);
+    }
+  });
+  const suffix = query.toString() ? `?${query.toString()}` : "";
+  try {
+    const data = await fetchJSON(`/api/services${suffix}`);
+    return Array.isArray(data.items) ? data.items : [];
+  } catch {
+    return [...defaultServices];
+  }
 }
 
 export function applyBranding(branding) {
@@ -494,6 +647,37 @@ export function renderMenuCard(item, options = {}) {
         <div class="menu-footer">
           <div class="small-copy">Issiq servis · 15-20 min tayyor</div>
           ${actionMarkup}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+export function renderServiceCard(item = {}) {
+  const media = resolveMenuMedia(item);
+  const badge = escapeHtml(item.badge || "Service");
+  const title = escapeHtml(item.name || "Xizmat");
+  const description = escapeHtml(item.description || "Biznes xizmat tavsifi.");
+  const priceLabel = escapeHtml(item.priceLabel || "Custom");
+
+  return `
+    <article class="menu-card reveal">
+      <div class="menu-media">
+        <img src="${media.src}" alt="${title}" loading="lazy" />
+        <span class="menu-badge">${badge}</span>
+      </div>
+      <div class="menu-body">
+        <div class="menu-topline">
+          <div>
+            <div class="menu-category">Service line</div>
+            <h3>${title}</h3>
+          </div>
+          <div class="price-tag">${priceLabel}</div>
+        </div>
+        <p class="card-copy">${description}</p>
+        <div class="menu-footer">
+          <div class="small-copy">Offline business flow</div>
+          <a class="button-secondary" href="/contact">So'rov yuborish</a>
         </div>
       </div>
     </article>

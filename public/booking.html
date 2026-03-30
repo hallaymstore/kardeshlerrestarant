@@ -16,25 +16,12 @@
   <main>
     <section class="page-hero">
       <div class="page-hero-copy reveal">
-        <div class="eyebrow">Reservation flow</div>
-        <h1 class="page-title">Dine-in va uchrashuvlar uchun <span>alohida bron sahifasi</span></h1>
-        <p class="page-copy">
+        <div id="bookingHeroEyebrow" class="eyebrow">Reservation flow</div>
+        <h1 id="bookingHeroTitle" class="page-title">Dine-in va uchrashuvlar uchun <span>alohida bron sahifasi</span></h1>
+        <p id="bookingHeroSubtitle" class="page-copy">
           Offline biznes uchun stol bron qilish alohida yo'nalishda bo'lishi kerak. Shu sabab bu sahifa buyurtmadan mustaqil, toza va maqsadga yo'naltirilgan.
         </p>
-        <div class="service-grid">
-          <div class="stat-card">
-            <div class="small-copy">Shift format</div>
-            <strong>Lunch / evening</strong>
-          </div>
-          <div class="stat-card">
-            <div class="small-copy">Group size</div>
-            <strong>1-20 guest</strong>
-          </div>
-          <div class="stat-card">
-            <div class="small-copy">Admin flow</div>
-            <strong>Status control</strong>
-          </div>
-        </div>
+        <div id="bookingStatsGrid" class="service-grid"></div>
       </div>
 
       <figure class="page-hero-art reveal">
@@ -42,7 +29,7 @@
         <figcaption class="overlay-copy">
           <div class="badge-soft">Reservation ready</div>
           <h3 style="margin:14px 0 8px;">Tez bron, premium joylashuv hissi va aniq vaqt oqimi</h3>
-          <p class="micro-copy" style="color: rgba(255,255,255,0.76);">Landing'dagi atmosferani reservation sahifasi davom ettiradi.</p>
+          <p class="micro-copy" style="color: rgba(255,255,255,0.76);">Landingdagi atmosferani reservation sahifasi davom ettiradi.</p>
         </figcaption>
       </figure>
     </section>
@@ -65,28 +52,15 @@
           </div>
 
           <div class="content-card reveal">
-            <div class="badge-soft">Use cases</div>
-            <div class="stack-list" style="margin-top:16px;">
-              <div class="service-item">
-                <strong>Tug'ilgan kun va kichik tadbirlar</strong>
-                <p class="card-copy">Oila yoki yaqin doira uchun oldindan tayyorlanadigan joylashuv.</p>
-              </div>
-              <div class="service-item">
-                <strong>Business meeting va team lunch</strong>
-                <p class="card-copy">Tez ovqatlanish bilan birga qulay uchrashuv muhiti ham saqlanadi.</p>
-              </div>
-              <div class="service-item">
-                <strong>Weekend family table</strong>
-                <p class="card-copy">Oldindan bron qilingan stol navbat muammosini keskin kamaytiradi.</p>
-              </div>
-            </div>
+            <div id="bookingUseCasesTitle" class="badge-soft">Use cases</div>
+            <div id="bookingUseCases" class="stack-list" style="margin-top:16px;"></div>
           </div>
         </div>
 
         <div class="form-card reveal">
           <div class="badge-soft">Reservation form</div>
-          <h3 style="margin:16px 0 8px;">Bron yuborish</h3>
-          <p class="card-copy">Sana, vaqt va mehmonlar sonini qoldiring. Admin panel orqali holat tasdiqlanadi.</p>
+          <h3 id="bookingFormTitle" style="margin:16px 0 8px;">Bron yuborish</h3>
+          <p id="bookingFormText" class="card-copy">Sana, vaqt va mehmonlar sonini qoldiring. Admin panel orqali holat tasdiqlanadi.</p>
 
           <form id="reservationForm" class="stack-list" style="margin-top:20px;">
             <div class="field-grid">
