@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Reservation sahifasi: dine-in, private table va tadbir so'rovlarini qabul qiladigan premium fastfood booking interfeysi."
+  />
+  <title>Scarlet Bite | Reservation</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+  <header id="siteHeader"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-copy reveal">
+        <div class="eyebrow">Reservation flow</div>
+        <h1 class="page-title">Dine-in va uchrashuvlar uchun <span>alohida bron sahifasi</span></h1>
+        <p class="page-copy">
+          Offline biznes uchun stol bron qilish alohida yo'nalishda bo'lishi kerak. Shu sabab bu sahifa buyurtmadan mustaqil, toza va maqsadga yo'naltirilgan.
+        </p>
+        <div class="service-grid">
+          <div class="stat-card">
+            <div class="small-copy">Shift format</div>
+            <strong>Lunch / evening</strong>
+          </div>
+          <div class="stat-card">
+            <div class="small-copy">Group size</div>
+            <strong>1-20 guest</strong>
+          </div>
+          <div class="stat-card">
+            <div class="small-copy">Admin flow</div>
+            <strong>Status control</strong>
+          </div>
+        </div>
+      </div>
+
+      <figure class="page-hero-art reveal">
+        <img id="bookingHeroImage" src="/assets/images/restaurant-interior.jpg" alt="Reservation interior" />
+        <figcaption class="overlay-copy">
+          <div class="badge-soft">Reservation ready</div>
+          <h3 style="margin:14px 0 8px;">Tez bron, premium joylashuv hissi va aniq vaqt oqimi</h3>
+          <p class="micro-copy" style="color: rgba(255,255,255,0.76);">Landing'dagi atmosferani reservation sahifasi davom ettiradi.</p>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="booking-layout">
+        <div class="stack-list">
+          <div class="form-card reveal">
+            <div class="badge-soft">Space concept</div>
+            <h3 style="margin:16px 0 10px;">Bron bilan sotiladigan muhit</h3>
+            <p class="card-copy">Yaxshi reservation sahifasi joyning o'zini ham ko'rsatadi. Shu yerda foydalanuvchi premium fastfood ichki muhitini his qiladi.</p>
+            <div class="mini-grid" style="margin-top:18px;">
+              <figure class="media-card" style="min-height:220px;">
+                <img id="loungeImage" src="/assets/images/kitchen-team.jpg" alt="Lounge space" />
+              </figure>
+              <figure class="media-card" style="min-height:220px;">
+                <img id="dinnerImage" src="/assets/images/dining-scene.jpg" alt="Dinner crowd" />
+              </figure>
+            </div>
+          </div>
+
+          <div class="content-card reveal">
+            <div class="badge-soft">Use cases</div>
+            <div class="stack-list" style="margin-top:16px;">
+              <div class="service-item">
+                <strong>Tug'ilgan kun va kichik tadbirlar</strong>
+                <p class="card-copy">Oila yoki yaqin doira uchun oldindan tayyorlanadigan joylashuv.</p>
+              </div>
+              <div class="service-item">
+                <strong>Business meeting va team lunch</strong>
+                <p class="card-copy">Tez ovqatlanish bilan birga qulay uchrashuv muhiti ham saqlanadi.</p>
+              </div>
+              <div class="service-item">
+                <strong>Weekend family table</strong>
+                <p class="card-copy">Oldindan bron qilingan stol navbat muammosini keskin kamaytiradi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card reveal">
+          <div class="badge-soft">Reservation form</div>
+          <h3 style="margin:16px 0 8px;">Bron yuborish</h3>
+          <p class="card-copy">Sana, vaqt va mehmonlar sonini qoldiring. Admin panel orqali holat tasdiqlanadi.</p>
+
+          <form id="reservationForm" class="stack-list" style="margin-top:20px;">
+            <div class="field-grid">
+              <input class="field" name="fullName" placeholder="Ism va familiya" required />
+              <input class="field" name="phone" placeholder="Telefon" required />
+              <input class="field" name="guests" type="number" min="1" max="20" placeholder="Mehmonlar soni" required />
+              <input class="field" name="date" type="date" required />
+              <input class="field" name="time" type="time" required />
+            </div>
+            <textarea name="notes" placeholder="VIP zona, bezak, bolalar joyi yoki boshqa izoh"></textarea>
+            <button class="button" type="submit">Bron qilish</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script type="module" src="/assets/js/booking.js"></script>
+</body>
+</html>

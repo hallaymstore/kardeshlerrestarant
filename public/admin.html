@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scarlet Bite Admin Panel</title>
+  <style>
+    :root {
+      --bg: #0c0b10; --card: #15131b; --line: rgba(255,255,255,.08); --text: #f7f5f6; --muted:#ae9ea5;
+      --primary:#d3162c; --primary2:#ff3150; --ok:#27c77a; --warn:#ffcb67;
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,#09070c,#13070a);color:var(--text)}
+    .wrap{width:min(1220px,calc(100% - 24px));margin:18px auto 40px}
+    .glass{background:rgba(255,255,255,.05);border:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(211,22,44,.15)}
+    .nav,.card,.table{border-radius:24px}.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;margin-bottom:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:grid;place-items:center}
+    .btn,.btn-outline,select,input,textarea{font:inherit;border-radius:14px;padding:12px 14px}
+    .btn{border:0;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800;cursor:pointer}
+    .btn-outline{border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer}
+    input,select,textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text)}
+    textarea{min-height:100px;resize:vertical}
+    .hero{display:grid;grid-template-columns:300px 1fr;gap:16px}.card{padding:18px;background:rgba(255,255,255,.045);border:1px solid var(--line)}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat strong{font-size:30px;display:block;margin-top:8px}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.tab{padding:12px 16px;border-radius:14px;border:1px solid var(--line);cursor:pointer;background:rgba(255,255,255,.03)}
+    .tab.active{background:linear-gradient(135deg,var(--primary),var(--primary2));border-color:transparent}.panel{display:none}.panel.active{display:block}
+    .table{overflow:hidden;border:1px solid var(--line)} table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.03)} th,td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{color:#ffccd4;font-size:13px;text-transform:uppercase;letter-spacing:.08em}.pill{display:inline-flex;padding:8px 10px;border-radius:999px;background:rgba(255,49,80,.12);border:1px solid rgba(255,49,80,.24)}
+    .muted{color:var(--muted)} .small{font-size:13px} .inline{display:flex;gap:10px;align-items:center;flex-wrap:wrap} .forms{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .hidden{display:none}.right{text-align:right}.toast{position:fixed;right:16px;bottom:16px;background:#111;color:#fff;padding:12px 14px;border-radius:14px;opacity:0;transform:translateY(20px);transition:.25s}.toast.show{opacity:1;transform:translateY(0)}
+    @media (max-width:960px){.hero,.grid,.forms{grid-template-columns:1fr}.table{overflow:auto}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav glass">
+      <div class="brand"><div class="logo">🛠️</div><div><div>Scarlet Bite Admin</div><div class="small muted">Menu · Orders · Reservations · Applications · Branding</div></div></div>
+      <div class="inline"><a href="/" class="btn-outline" style="text-decoration:none">Asosiy sayt</a><button id="logoutBtn" class="btn-outline">Chiqish</button></div>
+    </div>
+
+    <div class="hero">
+      <div id="loginCard" class="card glass">
+        <h3>Admin kirish</h3>
+        <p class="small muted">Default parol: <code>admin123</code> — production’da environment orqali o‘zgartiring.</p>
+        <form id="loginForm">
+          <input name="password" type="password" placeholder="Admin parol" required />
+          <div style="margin-top:12px"><button class="btn" type="submit">Kirish</button></div>
+        </form>
+      </div>
+      <div id="dashboardWrap" class="hidden">
+        <div class="grid">
+          <div class="card glass stat"><span class="small muted">Buyurtmalar</span><strong id="sOrders">0</strong></div>
+          <div class="card glass stat"><span class="small muted">Bronlar</span><strong id="sReservations">0</strong></div>
+          <div class="card glass stat"><span class="small muted">Arizalar</span><strong id="sApplications">0</strong></div>
+          <div class="card glass stat"><span class="small muted">Aylanma</span><strong id="sRevenue">0</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="adminBody" class="hidden">
+      <div class="tabs">
+        <button class="tab active" data-tab="orders">Buyurtmalar</button>
+        <button class="tab" data-tab="reservations">Bronlar</button>
+        <button class="tab" data-tab="applications">Arizalar</button>
+        <button class="tab" data-tab="menu">Menyu</button>
+        <button class="tab" data-tab="branding">Branding</button>
+      </div>
+
+      <section class="panel active" id="panel-orders">
+        <div class="table glass"><table><thead><tr><th>Mijoz</th><th>Items</th><th>Jami</th><th>Status</th><th>Action</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+      </section>
+
+      <section class="panel" id="panel-reservations">
+        <div class="table glass"><table><thead><tr><th>Mijoz</th><th>Bron</th><th>Izoh</th><th>Status</th><th>Action</th></tr></thead><tbody id="reservationsBody"></tbody></table></div>
+      </section>
+
+      <section class="panel" id="panel-applications">
+        <div class="table glass"><table><thead><tr><th>Mijoz</th><th>Yo‘nalish</th><th>Xabar</th><th>Status</th><th>Action</th></tr></thead><tbody id="applicationsBody"></tbody></table></div>
+      </section>
+
+      <section class="panel" id="panel-menu">
+        <div class="forms">
+          <div class="card glass">
+            <h3>Yangi mahsulot qo‘shish</h3>
+            <form id="menuForm">
+              <div class="inline" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <input name="name" placeholder="Nom" required />
+                <input name="price" type="number" placeholder="Narx" required />
+                <input name="category" placeholder="Kategoriya" />
+                <input name="badge" placeholder="Badge" />
+                <input name="image" placeholder="Emoji yoki rasm link" />
+                <select name="featured"><option value="false">Featured emas</option><option value="true">Featured</option></select>
+              </div>
+              <div style="margin-top:12px"><textarea name="description" placeholder="Tavsif"></textarea></div>
+              <div style="margin-top:12px"><button class="btn" type="submit">Qo‘shish</button></div>
+            </form>
+          </div>
+          <div class="card glass">
+            <h3>Menyu ro‘yxati</h3>
+            <div id="menuList" class="small muted">Yuklanmoqda...</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-branding">
+        <div class="card glass">
+          <h3>Brend sozlamalari</h3>
+          <form id="brandingForm">
+            <div class="forms">
+              <div>
+                <input name="brandName" placeholder="Brand nomi" />
+                <div style="height:12px"></div>
+                <input name="phone" placeholder="Telefon" />
+                <div style="height:12px"></div>
+                <input name="address" placeholder="Manzil" />
+                <div style="height:12px"></div>
+                <input name="telegram" placeholder="Telegram URL" />
+              </div>
+              <div>
+                <textarea name="heroTitle" placeholder="Hero title"></textarea>
+                <div style="height:12px"></div>
+                <textarea name="heroSubtitle" placeholder="Hero subtitle"></textarea>
+              </div>
+            </div>
+            <div style="margin-top:12px"><button class="btn" type="submit">Saqlash</button></div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const fmt = n => new Intl.NumberFormat('uz-UZ').format(Number(n||0)) + ' so‘m';
+    let adminToken = localStorage.getItem('scarlet_admin_token') || '';
+
+    function showToast(text){ const t=$('#toast'); t.textContent=text; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
+    async function fetchJSON(url, options={}){
+      const res = await fetch(url,{headers:{'Content-Type':'application/json','x-admin-token':adminToken,...(options.headers||{})},...options});
+      const data = await res.json();
+      if(!res.ok || data.success===false) throw new Error(data.message||'Xatolik');
+      return data;
+    }
+    function setLoggedIn(v){
+      $('#loginCard').classList.toggle('hidden', v);
+      $('#dashboardWrap').classList.toggle('hidden', !v);
+      $('#adminBody').classList.toggle('hidden', !v);
+    }
+    function statusSelect(current, options, fnName, id){
+      return `<select onchange="window.${fnName}('${id}', this.value)">${options.map(o=>`<option value="${o}" ${o===current?'selected':''}>${o}</option>`).join('')}</select>`;
+    }
+    window.updateOrderStatus = async (id, status)=>{ try{ await fetchJSON('/api/admin/orders/'+id,{method:'PUT',body:JSON.stringify({status})}); showToast('Buyurtma yangilandi'); loadDashboard(); }catch(e){showToast(e.message)} };
+    window.updateReservationStatus = async (id, status)=>{ try{ await fetchJSON('/api/admin/reservations/'+id,{method:'PUT',body:JSON.stringify({status})}); showToast('Bron yangilandi'); loadDashboard(); }catch(e){showToast(e.message)} };
+    window.updateApplicationStatus = async (id, status)=>{ try{ await fetchJSON('/api/admin/applications/'+id,{method:'PUT',body:JSON.stringify({status})}); showToast('Ariza yangilandi'); loadDashboard(); }catch(e){showToast(e.message)} };
+    window.deleteMenu = async (id)=>{ try{ await fetchJSON('/api/admin/menu/'+id,{method:'DELETE'}); showToast('Mahsulot o‘chirildi'); loadDashboard(); }catch(e){showToast(e.message)} };
+
+    async function loadDashboard(){
+      const data = await fetchJSON('/api/admin/dashboard');
+      $('#sOrders').textContent = data.stats.orderCount;
+      $('#sReservations').textContent = data.stats.reservationCount;
+      $('#sApplications').textContent = data.stats.applicationCount;
+      $('#sRevenue').textContent = fmt(data.stats.revenue);
+
+      $('#ordersBody').innerHTML = data.orders.map(x=>`<tr>
+        <td><strong>${x.customerName}</strong><div class="small muted">${x.phone}<br>${x.orderType} ${x.address ? '· '+x.address : ''}</div></td>
+        <td class="small">${x.items.map(i=>`${i.name} × ${i.qty}`).join('<br>')}</td>
+        <td><strong>${fmt(x.total)}</strong></td>
+        <td><span class="pill">${x.status}</span></td>
+        <td>${statusSelect(x.status,['new','confirmed','preparing','on_the_way','completed','cancelled'], 'updateOrderStatus', x._id)}</td>
+      </tr>`).join('') || '<tr><td colspan="5">Buyurtmalar yo‘q</td></tr>';
+
+      $('#reservationsBody').innerHTML = data.reservations.map(x=>`<tr>
+        <td><strong>${x.fullName}</strong><div class="small muted">${x.phone}<br>${x.guests} mehmon</div></td>
+        <td>${x.date} ${x.time}</td>
+        <td class="small">${x.notes || '—'}</td>
+        <td><span class="pill">${x.status}</span></td>
+        <td>${statusSelect(x.status,['new','approved','completed','cancelled'], 'updateReservationStatus', x._id)}</td>
+      </tr>`).join('') || '<tr><td colspan="5">Bronlar yo‘q</td></tr>';
+
+      $('#applicationsBody').innerHTML = data.applications.map(x=>`<tr>
+        <td><strong>${x.fullName}</strong><div class="small muted">${x.phone}</div></td>
+        <td>${x.purpose}</td>
+        <td class="small">${x.message || '—'}</td>
+        <td><span class="pill">${x.status}</span></td>
+        <td>${statusSelect(x.status,['new','reviewed','accepted','rejected'], 'updateApplicationStatus', x._id)}</td>
+      </tr>`).join('') || '<tr><td colspan="5">Arizalar yo‘q</td></tr>';
+
+      $('#menuList').innerHTML = data.menu.map(x=>`
+        <div class="card" style="margin-bottom:10px;padding:12px;">
+          <div class="inline" style="justify-content:space-between;align-items:start;">
+            <div><strong>${x.image || '🍔'} ${x.name}</strong><div class="small muted">${x.category} · ${fmt(x.price)} · ${x.badge || 'badge yo‘q'}</div></div>
+            <button class="btn-outline" onclick="deleteMenu('${x._id}')">O‘chirish</button>
+          </div>
+          <div class="small muted" style="margin-top:6px">${x.description || ''}</div>
+        </div>
+      `).join('') || 'Menyu bo‘sh';
+
+      const b = data.branding || {};
+      for (const key of ['brandName','phone','address','telegram','heroTitle','heroSubtitle']) {
+        const el = document.querySelector(`#brandingForm [name="${key}"]`);
+        if (el) el.value = b[key] || '';
+      }
+    }
+
+    $('#loginForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      try {
+        const payload = Object.fromEntries(new FormData(e.target).entries());
+        const data = await fetchJSON('/api/admin/login',{method:'POST',body:JSON.stringify(payload),headers:{'x-admin-token':''}});
+        adminToken = data.token; localStorage.setItem('scarlet_admin_token', adminToken);
+        setLoggedIn(true); await loadDashboard(); showToast('Admin panelga kirildi');
+      } catch(err){ showToast(err.message); }
+    });
+
+    $('#menuForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      try {
+        const fd = Object.fromEntries(new FormData(e.target).entries());
+        fd.price = Number(fd.price); fd.featured = fd.featured === 'true'; fd.active = true;
+        await fetchJSON('/api/admin/menu',{method:'POST',body:JSON.stringify(fd)});
+        e.target.reset(); showToast('Mahsulot qo‘shildi'); loadDashboard();
+      } catch(err){ showToast(err.message); }
+    });
+
+    $('#brandingForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      try {
+        const payload = Object.fromEntries(new FormData(e.target).entries());
+        await fetchJSON('/api/admin/branding',{method:'PUT',body:JSON.stringify(payload)});
+        showToast('Branding saqlandi');
+      } catch(err){ showToast(err.message); }
+    });
+
+    $$('.tab').forEach(tab=>tab.addEventListener('click', ()=>{
+      $$('.tab').forEach(x=>x.classList.remove('active')); tab.classList.add('active');
+      $$('.panel').forEach(p=>p.classList.remove('active')); $('#panel-'+tab.dataset.tab).classList.add('active');
+    }));
+
+    $('#logoutBtn').onclick = ()=>{ localStorage.removeItem('scarlet_admin_token'); adminToken=''; setLoggedIn(false); showToast('Chiqildi'); };
+
+    (async function init(){
+      if(adminToken){
+        try { setLoggedIn(true); await loadDashboard(); }
+        catch{ setLoggedIn(false); localStorage.removeItem('scarlet_admin_token'); }
+      }
+    })();
+  </script>
+</body>
+</html>

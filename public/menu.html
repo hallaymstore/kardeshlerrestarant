@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Menu qidiruvi, category filter, savatcha va order formasi bir sahifada jamlangan premium fastfood interfeysi."
+  />
+  <title>Scarlet Bite | Menu va Order</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+  <header id="siteHeader"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-copy reveal">
+        <div class="eyebrow">Menu, qidiruv va checkout</div>
+        <h1 class="page-title">Order oqimini <span>alohida sahifaga</span> olib chiqdik</h1>
+        <p class="page-copy">
+          Bu yerda foydalanuvchi category bo'yicha filterlaydi, mahsulot qidiradi, savatchaga qo'shadi va shu joyning o'zida delivery yoki pickup buyurtmasini yuboradi.
+        </p>
+        <div class="page-hero-stats">
+          <div class="stat-card">
+            <div class="small-copy">Qidiruv</div>
+            <strong>Live filter</strong>
+          </div>
+          <div class="stat-card">
+            <div class="small-copy">Checkout</div>
+            <strong>1 panel</strong>
+          </div>
+          <div class="stat-card">
+            <div class="small-copy">Order turi</div>
+            <strong>Delivery / Pickup</strong>
+          </div>
+        </div>
+      </div>
+
+      <figure class="page-hero-art reveal">
+        <img id="menuHeroImage" src="/assets/images/menu-burger.jpg" alt="Menu visual" />
+        <figcaption class="overlay-copy">
+          <div class="badge-soft">Catalog view</div>
+          <h3 style="margin:14px 0 8px;">Signature mahsulotlarni tez topish uchun soddalashtirilgan oqim</h3>
+          <p class="micro-copy" style="color: rgba(255,255,255,0.76);">User menu kartadan chiqmay turib, savatga qo'shadi va checkout'ga o'tadi.</p>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">Fast catalog</div>
+          <h2 class="section-title">Qidiruv, filter va <span>savat</span> bir ritmda</h2>
+        </div>
+        <div id="catalogCount" class="badge-soft">0 ta pozitsiya</div>
+      </div>
+
+      <div class="filter-bar reveal">
+        <div class="search-wrap">
+          <span>Q</span>
+          <input id="menuSearch" class="field" type="search" placeholder="Burger, combo, drinks yoki badge bo'yicha qidiring" />
+        </div>
+        <div id="categoryChips" class="chip-row"></div>
+      </div>
+
+      <div class="catalog-layout">
+        <div id="catalogGrid" class="catalogGrid catalog-grid"></div>
+
+        <aside class="cart-panel reveal">
+          <div class="badge-soft">Checkout panel</div>
+          <h3 style="margin:16px 0 8px;">Savatcha</h3>
+          <p id="cartLabel" class="card-copy">Savat hozircha bo'sh</p>
+          <div id="cartList" class="cart-list" style="margin-top:18px;"></div>
+
+          <div class="total-block">
+            <div class="small-copy">Jami</div>
+            <div id="cartTotal" class="total-value">0 so'm</div>
+          </div>
+
+          <form id="orderForm" class="stack-list">
+            <div class="field-grid">
+              <input class="field" name="customerName" placeholder="Ism" required />
+              <input class="field" name="phone" placeholder="Telefon" required />
+              <select name="orderType">
+                <option value="delivery">Delivery</option>
+                <option value="pickup">Pickup</option>
+              </select>
+              <input class="field" name="address" placeholder="Manzil yoki orientir" />
+            </div>
+            <textarea name="note" placeholder="Izoh: qavat, orientir, sous yoki qadoqlash bo'yicha istak"></textarea>
+            <div class="button-row">
+              <button class="button" type="submit">Buyurtma yuborish</button>
+              <button id="clearCart" class="button-secondary" type="button">Savatni tozalash</button>
+            </div>
+          </form>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script type="module" src="/assets/js/menu.js"></script>
+</body>
+</html>
