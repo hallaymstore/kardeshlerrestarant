@@ -36,6 +36,7 @@ body {
   min-height: 100vh;
   font-family: "Manrope", system-ui, sans-serif;
   color: var(--text);
+  overflow-x: hidden;
   background:
     radial-gradient(circle at top left, rgba(216, 74, 36, 0.14), transparent 28%),
     radial-gradient(circle at right 20%, rgba(241, 183, 99, 0.14), transparent 24%),
@@ -147,6 +148,7 @@ button {
 }
 
 .site-nav a {
+  white-space: nowrap;
   padding: 10px 14px;
   border-radius: 999px;
   color: var(--muted);
@@ -179,6 +181,9 @@ button {
 .button-secondary,
 .button-link,
 .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   padding: 14px 20px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -1042,6 +1047,8 @@ textarea {
 
 @media (max-width: 920px) {
   .topbar {
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
     text-align: center;
   }
@@ -1053,6 +1060,7 @@ textarea {
   }
 
   .site-nav {
+    width: 100%;
     justify-content: center;
   }
 
@@ -1109,6 +1117,19 @@ textarea {
 
   .topbar {
     padding: 14px 12px;
+    gap: 12px;
+    border-radius: 24px;
+    text-align: left;
+  }
+
+  .brand {
+    justify-content: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .site-nav {
@@ -1127,25 +1148,58 @@ textarea {
     margin-top: 20px;
   }
 
+  .section-header {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .section {
+    margin-top: 54px;
+  }
+
+  .hero-copy,
+  .page-hero-copy,
+  .section-header {
+    gap: 16px;
+  }
+
   .hero-visual {
     min-height: 360px;
   }
 
   .photo-panel.primary {
-    inset: 18px 18px 120px 18px;
+    inset: 18px 18px 92px 18px;
   }
 
   .photo-panel.secondary {
-    left: 18px;
-    right: 18px;
-    width: auto;
-    height: 120px;
+    display: none;
   }
 
   .floating-panel {
     left: 18px;
     right: 18px;
     bottom: 18px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .scene-tag {
+    left: 18px;
+    top: 18px;
+    font-size: 0.82rem;
+  }
+
+  .eyebrow {
+    max-width: 100%;
+  }
+
+  .hero-text,
+  .section-copy,
+  .page-copy,
+  .card-copy,
+  .list-copy {
+    font-size: 0.98rem;
+    line-height: 1.68;
   }
 
   .page-hero-copy,
@@ -1174,5 +1228,159 @@ textarea {
 
   .button-row {
     display: grid;
+  }
+
+  .header-actions .button,
+  .header-actions .button-secondary,
+  .header-actions .button-link {
+    width: 100%;
+  }
+
+  .menu-topline,
+  .menu-footer,
+  .summary-line,
+  .cart-item-top,
+  .inline-stack,
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ticker-track {
+    padding: 12px;
+  }
+
+  .ticker-chip {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+  }
+
+  .page-hero-art .overlay-copy,
+  .media-card figcaption {
+    padding: 20px;
+  }
+
+  .site-toast {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    max-width: none;
+  }
+
+  .site-footer {
+    border-radius: 24px;
+    margin-bottom: 20px;
+  }
+
+  .field,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 12px 10px;
+    border-radius: 22px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+  }
+
+  .brand-copy strong {
+    font-size: 1rem;
+  }
+
+  .brand-copy span,
+  .footer-note,
+  .micro-copy {
+    font-size: 0.84rem;
+  }
+
+  .site-nav a {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .header-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 13vw, 3.4rem);
+  }
+
+  .page-title,
+  .section-title {
+    font-size: clamp(1.7rem, 9vw, 2.4rem);
+  }
+
+  .hero-text,
+  .section-copy,
+  .page-copy,
+  .card-copy,
+  .list-copy {
+    font-size: 0.94rem;
+  }
+
+  .photo-panel.primary {
+    inset: 14px 14px 84px 14px;
+  }
+
+  .scene-tag {
+    left: 14px;
+    top: 14px;
+    font-size: 0.78rem;
+  }
+
+  .floating-panel {
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    padding: 12px;
+    border-radius: 18px;
+    gap: 8px;
+  }
+
+  .floating-panel strong {
+    font-size: 1.15rem !important;
+  }
+
+  .floating-panel .micro-copy {
+    display: none;
+  }
+
+  .page-hero-copy,
+  .hero-note,
+  .metric-card,
+  .content-card,
+  .feature-card,
+  .process-body,
+  .menu-body,
+  .quote-card,
+  .branch-card,
+  .contact-card,
+  .cart-panel,
+  .form-card,
+  .site-footer {
+    padding: 16px;
+  }
+
+  .page-hero-art .overlay-copy,
+  .media-card figcaption {
+    padding: 18px;
+  }
+
+  .hero-visual,
+  .page-hero-art {
+    min-height: 320px;
   }
 }
