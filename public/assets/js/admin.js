@@ -7,6 +7,130 @@
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
   const fmtMoney = (value) => `${new Intl.NumberFormat("uz-UZ").format(Number(value || 0))} so'm`;
+  const repeaterConfigs = {
+    homeMetrics: {
+      containerId: "homeMetricsList",
+      itemLabel: "Statistika",
+      minItems: 3,
+      fields: [
+        { name: "label", label: "Nomi", placeholder: "Oylik order oqimi" },
+        { name: "value", label: "Raqam", type: "number", placeholder: "12000" },
+        { name: "prefix", label: "Old yozuv", placeholder: "4." },
+        { name: "suffix", label: "Qo'shimcha", placeholder: "+" },
+        {
+          name: "description",
+          label: "Izoh",
+          type: "textarea",
+          full: true,
+          placeholder: "Bu ko'rsatkich nimani anglatishini yozing",
+        },
+      ],
+    },
+    homeFeatures: {
+      containerId: "homeFeaturesList",
+      itemLabel: "Afzallik",
+      minItems: 3,
+      fields: [
+        { name: "label", label: "Yorliq", placeholder: "01 · Story-led intro" },
+        { name: "title", label: "Sarlavha", placeholder: "Bir qarashda premium" },
+        {
+          name: "description",
+          label: "Tavsif",
+          type: "textarea",
+          full: true,
+          placeholder: "Ushbu afzallik haqida qisqacha yozing",
+        },
+      ],
+    },
+    homeProcess: {
+      containerId: "homeProcessList",
+      itemLabel: "Jarayon",
+      minItems: 3,
+      fields: [
+        { name: "step", label: "Qadam belgisi", placeholder: "01 · Grill" },
+        { name: "title", label: "Sarlavha", placeholder: "Issiq batch va tez tayyorlash" },
+        {
+          name: "image",
+          label: "Rasm kaliti yoki URL",
+          placeholder: "grill yoki https://...",
+          full: true,
+          hint: "Tayyor kalitlar: hero, menu, grill, dining, interior, terrace.",
+        },
+        {
+          name: "description",
+          label: "Tavsif",
+          type: "textarea",
+          full: true,
+          placeholder: "Jarayon haqida qisqacha yozing",
+        },
+      ],
+    },
+    homeTestimonials: {
+      containerId: "homeTestimonialsList",
+      itemLabel: "Fikr",
+      minItems: 3,
+      fields: [
+        {
+          name: "quote",
+          label: "Fikr matni",
+          type: "textarea",
+          full: true,
+          placeholder: "Mijoz yoki hamkor fikrini yozing",
+        },
+        { name: "author", label: "Muallif", placeholder: "Brand owner" },
+        { name: "meta", label: "Qo'shimcha izoh", placeholder: "Conversion focus" },
+      ],
+    },
+    bookingStats: {
+      containerId: "bookingStatsList",
+      itemLabel: "Booking statistika",
+      minItems: 3,
+      fields: [
+        { name: "label", label: "Nomi", placeholder: "Shift format" },
+        { name: "value", label: "Qiymat", placeholder: "Lunch / evening" },
+      ],
+    },
+    bookingUseCases: {
+      containerId: "bookingUseCasesList",
+      itemLabel: "Use case",
+      minItems: 3,
+      fields: [
+        { name: "title", label: "Sarlavha", placeholder: "Tug'ilgan kun va kichik tadbirlar" },
+        {
+          name: "description",
+          label: "Tavsif",
+          type: "textarea",
+          full: true,
+          placeholder: "Qaysi vaziyat uchun mosligini yozing",
+        },
+      ],
+    },
+    contactCards: {
+      containerId: "contactCardsList",
+      itemLabel: "Aloqa kartasi",
+      minItems: 3,
+      fields: [
+        { name: "label", label: "Nomi", placeholder: "Telefon" },
+        { name: "value", label: "Qiymat", placeholder: "+998 90 123 45 67" },
+      ],
+    },
+    contactBranches: {
+      containerId: "contactBranchesList",
+      itemLabel: "Filial",
+      minItems: 3,
+      fields: [
+        { name: "label", label: "Yorliq", placeholder: "Yunusobod" },
+        { name: "title", label: "Sarlavha", placeholder: "Lunch rush nuqtasi" },
+        {
+          name: "description",
+          label: "Tavsif",
+          type: "textarea",
+          full: true,
+          placeholder: "Filial yoki lokatsiya haqida yozing",
+        },
+      ],
+    },
+  };
 
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"']/g, (char) => {
@@ -276,8 +400,108 @@
     renderImagePreview("serviceImagePreview", item.image || "");
   }
 
-  function formatJson(value) {
-    return JSON.stringify(value || [], null, 2);
+  function renderRepeaterItem(name, item = {}, index = 0) {
+    const config = repeaterConfigs[name];
+    return `
+      <article class="repeater-item" data-repeater-item="${name}">
+        <div class="repeater-head">
+          <h4 class="repeater-title">${escapeHtml(config.itemLabel)} ${index + 1}</h4>
+          <button class="danger-button" type="button" data-remove-list-item="${name}" data-item-index="${index}">O'chirish</button>
+        </div>
+        <div class="repeater-grid">
+          ${config.fields
+            .map((field) => {
+              const id = `${name}-${index}-${field.name}`;
+              const rawValue = item[field.name];
+              const value = rawValue === undefined || rawValue === null ? "" : rawValue;
+              const inputMarkup =
+                field.type === "textarea"
+                  ? `<textarea id="${id}" class="field textarea" data-field-name="${field.name}" placeholder="${escapeHtml(
+                      field.placeholder || ""
+                    )}">${escapeHtml(value)}</textarea>`
+                  : `<input id="${id}" class="field" data-field-name="${field.name}" type="${field.type || "text"}" value="${escapeHtml(
+                      value
+                    )}" placeholder="${escapeHtml(field.placeholder || "")}" />`;
+
+              return `
+                <label class="repeater-field ${field.full ? "full" : ""}" for="${id}">
+                  <span class="field-label">${escapeHtml(field.label)}</span>
+                  ${inputMarkup}
+                  ${field.hint ? `<span class="helper-text">${escapeHtml(field.hint)}</span>` : ""}
+                </label>
+              `;
+            })
+            .join("")}
+        </div>
+      </article>
+    `;
+  }
+
+  function normalizeRepeaterItems(name, items = []) {
+    const config = repeaterConfigs[name];
+    const list = Array.isArray(items) ? [...items] : [];
+    const count = Math.max(list.length, config.minItems || 0);
+    if (!count) return [];
+    return Array.from({ length: count }, (_, index) => ({ ...(list[index] || {}) }));
+  }
+
+  function renderRepeaterList(name, items = [], options = {}) {
+    const config = repeaterConfigs[name];
+    const container = document.getElementById(config.containerId);
+    if (!container) return;
+
+    const normalized = options.keepMinimum
+      ? normalizeRepeaterItems(name, items)
+      : Array.isArray(items)
+        ? [...items]
+        : [];
+    container.innerHTML = normalized.length
+      ? normalized.map((item, index) => renderRepeaterItem(name, item, index)).join("")
+      : `<div class="empty-note">Hozircha qator yo'q. Yuqoridagi tugma orqali qo'shing.</div>`;
+  }
+
+  function extractRepeaterItems(name, { keepEmpty = false } = {}) {
+    const config = repeaterConfigs[name];
+    const container = document.getElementById(config.containerId);
+    if (!container) return [];
+
+    return [...container.querySelectorAll(`[data-repeater-item="${name}"]`)]
+      .map((itemNode) => {
+        const entry = {};
+        let hasValue = false;
+
+        config.fields.forEach((field) => {
+          const input = itemNode.querySelector(`[data-field-name="${field.name}"]`);
+          let value = input ? input.value.trim() : "";
+          if (field.type === "number" && value !== "") {
+            value = Number(value);
+          }
+          if (value !== "") {
+            hasValue = true;
+          }
+          entry[field.name] = value;
+        });
+
+        return { entry, hasValue };
+      })
+      .filter((item) => keepEmpty || item.hasValue)
+      .map((item) => item.entry);
+  }
+
+  function addRepeaterItem(name) {
+    const current = extractRepeaterItems(name, { keepEmpty: true });
+    current.push({});
+    renderRepeaterList(name, current, { keepMinimum: false });
+  }
+
+  function removeRepeaterItem(name, index) {
+    const current = extractRepeaterItems(name, { keepEmpty: true });
+    current.splice(index, 1);
+    renderRepeaterList(name, current, { keepMinimum: false });
+  }
+
+  function initializeRepeaters() {
+    Object.keys(repeaterConfigs).forEach((name) => renderRepeaterList(name, [], { keepMinimum: true }));
   }
 
   function populateBrandingForm(branding = {}) {
@@ -308,10 +532,10 @@
     form.elements.homeTestimonialsTitle.value = content.home?.testimonialsTitle || "";
     form.elements.homeCtaTitle.value = content.home?.ctaTitle || "";
     form.elements.homeCtaText.value = content.home?.ctaText || "";
-    form.elements.homeMetricsJson.value = formatJson(content.home?.metrics);
-    form.elements.homeFeaturesJson.value = formatJson(content.home?.features);
-    form.elements.homeProcessJson.value = formatJson(content.home?.process);
-    form.elements.homeTestimonialsJson.value = formatJson(content.home?.testimonials);
+    renderRepeaterList("homeMetrics", content.home?.metrics || [], { keepMinimum: true });
+    renderRepeaterList("homeFeatures", content.home?.features || [], { keepMinimum: true });
+    renderRepeaterList("homeProcess", content.home?.process || [], { keepMinimum: true });
+    renderRepeaterList("homeTestimonials", content.home?.testimonials || [], { keepMinimum: true });
 
     form.elements.bookingHeroEyebrow.value = content.booking?.heroEyebrow || "";
     form.elements.bookingUseCasesTitle.value = content.booking?.useCasesTitle || "";
@@ -319,28 +543,16 @@
     form.elements.bookingHeroSubtitle.value = content.booking?.heroSubtitle || "";
     form.elements.bookingFormTitle.value = content.booking?.formTitle || "";
     form.elements.bookingFormText.value = content.booking?.formText || "";
-    form.elements.bookingStatsJson.value = formatJson(content.booking?.stats);
-    form.elements.bookingUseCasesJson.value = formatJson(content.booking?.useCases);
+    renderRepeaterList("bookingStats", content.booking?.stats || [], { keepMinimum: true });
+    renderRepeaterList("bookingUseCases", content.booking?.useCases || [], { keepMinimum: true });
 
     form.elements.contactHeroEyebrow.value = content.contact?.heroEyebrow || "";
     form.elements.contactHeroTitle.value = content.contact?.heroTitle || "";
     form.elements.contactHeroSubtitle.value = content.contact?.heroSubtitle || "";
     form.elements.contactFormTitle.value = content.contact?.formTitle || "";
     form.elements.contactFormText.value = content.contact?.formText || "";
-    form.elements.contactCardsJson.value = formatJson(content.contact?.contactCards);
-    form.elements.contactBranchesJson.value = formatJson(content.contact?.branches);
-  }
-
-  function parseJsonField(label, raw) {
-    try {
-      const parsed = JSON.parse(raw || "[]");
-      if (!Array.isArray(parsed)) {
-        throw new Error("Array bo'lishi kerak");
-      }
-      return parsed;
-    } catch (error) {
-      throw new Error(`${label} JSON noto'g'ri: ${error.message}`);
-    }
+    renderRepeaterList("contactCards", content.contact?.contactCards || [], { keepMinimum: true });
+    renderRepeaterList("contactBranches", content.contact?.branches || [], { keepMinimum: true });
   }
 
   function buildContentPayload() {
@@ -364,10 +576,10 @@
         ctaEyebrow: form.elements.homeCtaEyebrow.value,
         ctaTitle: form.elements.homeCtaTitle.value,
         ctaText: form.elements.homeCtaText.value,
-        metrics: parseJsonField("Home metrics", form.elements.homeMetricsJson.value),
-        features: parseJsonField("Home features", form.elements.homeFeaturesJson.value),
-        process: parseJsonField("Home process", form.elements.homeProcessJson.value),
-        testimonials: parseJsonField("Home testimonials", form.elements.homeTestimonialsJson.value),
+        metrics: extractRepeaterItems("homeMetrics"),
+        features: extractRepeaterItems("homeFeatures"),
+        process: extractRepeaterItems("homeProcess"),
+        testimonials: extractRepeaterItems("homeTestimonials"),
       },
       booking: {
         heroEyebrow: form.elements.bookingHeroEyebrow.value,
@@ -376,8 +588,8 @@
         formTitle: form.elements.bookingFormTitle.value,
         formText: form.elements.bookingFormText.value,
         useCasesTitle: form.elements.bookingUseCasesTitle.value,
-        stats: parseJsonField("Booking stats", form.elements.bookingStatsJson.value),
-        useCases: parseJsonField("Booking use cases", form.elements.bookingUseCasesJson.value),
+        stats: extractRepeaterItems("bookingStats"),
+        useCases: extractRepeaterItems("bookingUseCases"),
       },
       contact: {
         heroEyebrow: form.elements.contactHeroEyebrow.value,
@@ -385,8 +597,8 @@
         heroSubtitle: form.elements.contactHeroSubtitle.value,
         formTitle: form.elements.contactFormTitle.value,
         formText: form.elements.contactFormText.value,
-        contactCards: parseJsonField("Contact cards", form.elements.contactCardsJson.value),
-        branches: parseJsonField("Contact branches", form.elements.contactBranchesJson.value),
+        contactCards: extractRepeaterItems("contactCards"),
+        branches: extractRepeaterItems("contactBranches"),
       },
     };
   }
@@ -470,6 +682,19 @@
 
   $$(".tab").forEach((button) => {
     button.addEventListener("click", () => switchTab(button.dataset.tab));
+  });
+
+  document.addEventListener("click", (event) => {
+    const addButton = event.target.closest("[data-add-list-item]");
+    if (addButton) {
+      addRepeaterItem(addButton.dataset.addListItem);
+      return;
+    }
+
+    const removeButton = event.target.closest("[data-remove-list-item]");
+    if (removeButton) {
+      removeRepeaterItem(removeButton.dataset.removeListItem, Number(removeButton.dataset.itemIndex));
+    }
   });
 
   $("#ordersTable").addEventListener("change", async (event) => {
@@ -656,6 +881,8 @@
       showToast(error.message);
     }
   });
+
+  initializeRepeaters();
 
   (async function init() {
     if (!state.adminToken) {

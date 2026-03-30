@@ -205,12 +205,6 @@ select {
   resize: vertical;
 }
 
-.json-area {
-  min-height: 180px;
-  font-family: Consolas, monospace;
-  font-size: 0.92rem;
-}
-
 .field:focus,
 .textarea:focus,
 select:focus {
@@ -329,6 +323,67 @@ select:focus {
   border-radius: 22px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.03);
+}
+
+.repeater-list {
+  display: grid;
+  gap: 14px;
+}
+
+.repeater-item {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.repeater-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.repeater-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.repeater-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.repeater-field {
+  display: grid;
+  gap: 8px;
+}
+
+.repeater-field.full {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.helper-text {
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.empty-note {
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  color: var(--muted);
+  text-align: center;
 }
 
 .table-card {
@@ -475,7 +530,8 @@ code {
   }
 
   .inline-row,
-  .list-head {
+  .list-head,
+  .repeater-head {
     flex-direction: column;
     align-items: stretch;
   }
@@ -488,6 +544,10 @@ code {
   .card,
   .table-card {
     padding: 18px;
+  }
+
+  .repeater-grid {
+    grid-template-columns: 1fr;
   }
 
   .thumb {
@@ -541,8 +601,8 @@ code {
     padding: 14px;
   }
 
-  .json-area {
-    min-height: 160px;
+  .repeater-item {
+    padding: 14px;
   }
 
   .thumb {

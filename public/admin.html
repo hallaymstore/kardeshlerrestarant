@@ -187,7 +187,7 @@
                 <div>
                   <div class="admin-kicker">Website content</div>
                   <h2>Landing, booking va contact kontenti</h2>
-                  <p class="muted-text">Takrorlanuvchi bloklar JSON formatda saqlanadi. Misollar textarealarda ko'rinadi.</p>
+                  <p class="muted-text">Hammasi oddiy forma orqali boshqariladi. Kerakli qatorlarni qo'shib yoki olib tashlab saqlaysiz.</p>
                 </div>
               </div>
 
@@ -213,10 +213,50 @@
                   <textarea class="field textarea" name="homeTestimonialsTitle" placeholder="Testimonials title"></textarea>
                   <textarea class="field textarea" name="homeCtaTitle" placeholder="CTA title"></textarea>
                   <textarea class="field textarea" name="homeCtaText" placeholder="CTA text"></textarea>
-                  <textarea class="field json-area" name="homeMetricsJson" placeholder="Home metrics JSON"></textarea>
-                  <textarea class="field json-area" name="homeFeaturesJson" placeholder="Home features JSON"></textarea>
-                  <textarea class="field json-area" name="homeProcessJson" placeholder="Home process JSON"></textarea>
-                  <textarea class="field json-area" name="homeTestimonialsJson" placeholder="Home testimonials JSON"></textarea>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Home statistikalar</h3>
+                      <p class="muted-text">Landing boshidagi raqamli ko'rsatkichlar.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="homeMetrics">Statistika qo'shish</button>
+                  </div>
+                  <div id="homeMetricsList" class="repeater-list"></div>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Home afzalliklar</h3>
+                      <p class="muted-text">Story bo'limidagi feature kartochkalari.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="homeFeatures">Afzallik qo'shish</button>
+                  </div>
+                  <div id="homeFeaturesList" class="repeater-list"></div>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Ish jarayoni lavhalari</h3>
+                      <p class="muted-text">Rasm, sarlavha va tavsif bilan jarayon bloklari.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="homeProcess">Jarayon qo'shish</button>
+                  </div>
+                  <div id="homeProcessList" class="repeater-list"></div>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Mijoz fikrlari</h3>
+                      <p class="muted-text">Quote, muallif va kichik izoh bilan testimonial kartalar.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="homeTestimonials">Fikr qo'shish</button>
+                  </div>
+                  <div id="homeTestimonialsList" class="repeater-list"></div>
                 </div>
 
                 <div class="subsection">
@@ -229,8 +269,28 @@
                   <textarea class="field textarea" name="bookingHeroSubtitle" placeholder="Booking hero subtitle"></textarea>
                   <textarea class="field textarea" name="bookingFormTitle" placeholder="Booking form title"></textarea>
                   <textarea class="field textarea" name="bookingFormText" placeholder="Booking form text"></textarea>
-                  <textarea class="field json-area" name="bookingStatsJson" placeholder="Booking stats JSON"></textarea>
-                  <textarea class="field json-area" name="bookingUseCasesJson" placeholder="Booking use cases JSON"></textarea>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Booking statistikalar</h3>
+                      <p class="muted-text">Bron sahifasidagi kichik status kartalari.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="bookingStats">Statistika qo'shish</button>
+                  </div>
+                  <div id="bookingStatsList" class="repeater-list"></div>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Booking use cases</h3>
+                      <p class="muted-text">Bron sahifasidagi qo'llanish ssenariylari.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="bookingUseCases">Use case qo'shish</button>
+                  </div>
+                  <div id="bookingUseCasesList" class="repeater-list"></div>
                 </div>
 
                 <div class="subsection">
@@ -242,8 +302,28 @@
                   <textarea class="field textarea" name="contactHeroSubtitle" placeholder="Contact hero subtitle"></textarea>
                   <textarea class="field textarea" name="contactFormTitle" placeholder="Contact form title"></textarea>
                   <textarea class="field textarea" name="contactFormText" placeholder="Contact form text"></textarea>
-                  <textarea class="field json-area" name="contactCardsJson" placeholder="Contact cards JSON"></textarea>
-                  <textarea class="field json-area" name="contactBranchesJson" placeholder="Contact branches JSON"></textarea>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Aloqa kartalari</h3>
+                      <p class="muted-text">Telefon, manzil, Telegram kabi qisqa ma'lumot bloklari.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="contactCards">Aloqa kartasi qo'shish</button>
+                  </div>
+                  <div id="contactCardsList" class="repeater-list"></div>
+                </div>
+
+                <div class="subsection">
+                  <div class="panel-head">
+                    <div>
+                      <h3>Filiallar</h3>
+                      <p class="muted-text">Contact sahifasidagi filial yoki lokatsiya kartalari.</p>
+                    </div>
+                    <button class="ghost-button" type="button" data-add-list-item="contactBranches">Filial qo'shish</button>
+                  </div>
+                  <div id="contactBranchesList" class="repeater-list"></div>
                 </div>
 
                 <button class="primary-button" type="submit">Website kontentini saqlash</button>
